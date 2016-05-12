@@ -29,5 +29,5 @@ def send_img(path):
 def send_mail(path):
     return send_from_directory('mail', path)
 
-if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0')
