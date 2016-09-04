@@ -15,7 +15,8 @@
   "dependencies": {
     "ejs": "2.4.1",
     "express": "4.13.3",
-    "nodemailer": "~2.4.1"
+    "nodemailer": "~2.4.1",
+    "pug": "^2.0.0-beta6"
   },
   "keywords": [
     "node",

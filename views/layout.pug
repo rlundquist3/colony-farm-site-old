@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+		include ./partials/_head.pug
+
+		body#page-top
+			include ./partials/_nav.pug
+			block content
+
+			script(src='/static/js/jquery.js')
+			script(src='/static/js/bootstap.min.js')
+			script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
+			script(src='/static/js/classie.js')
+			script(src='/static/js/cbpAnimatedHeader.js')
+			script(src='/static/js/jqBootstrapValidation.js')
+			script(src='/static/js/contact_me.js')
+			script(src='/static/js/agency.js')
