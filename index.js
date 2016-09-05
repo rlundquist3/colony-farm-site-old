@@ -1,6 +1,6 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
-var firebase = require('firebase');
+// var firebase = require('firebase');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -12,13 +12,13 @@ app.use('/static', express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
-// Initialize the app with no authentication
-firebase.initializeApp({
-  databaseURL: "https://colonyfarm-bae40.firebaseio.com"
-});
-
-// The app only has access to public data as defined in the Security Rules
-var db = firebase.database();
+// // Initialize the app with no authentication
+// firebase.initializeApp({
+//   databaseURL: "https://colonyfarm-bae40.firebaseio.com"
+// });
+//
+// // The app only has access to public data as defined in the Security Rules
+// var db = firebase.database();
 
 app.get('/', function(req, res) {
     var path = req.path;
