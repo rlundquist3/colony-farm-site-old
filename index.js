@@ -7,6 +7,7 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use('/static', express.static(__dirname + '/public'));
 
+
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
@@ -25,30 +26,30 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.get('/blog/:title?', function(req, res) {
-
-    // postsRef.orderByChild('date').limitToLast(5).on('child_added', function(snapshot) {
-    //     console.log(snapshot.key);
-    // });
-
-    var title = req.params.title;
-    var posts;
-    var postList;
-    var postsRef = db.ref('posts');
-    postsRef.once('value', function(data) {
-        posts = data.val();
-        postList = Object.keys(posts).map(function(value) {
-                                     return posts[value]});
-
-        if (title === undefined) {
-            res.status(503);
-            res.render('blog', {posts: postList});
-        } else {
-            var post = posts[title] || {};
-            res.render('post', {post: post});
-        }
-    });
-});
+// app.get('/blog/:title?', function(req, res) {
+//
+//     // postsRef.orderByChild('date').limitToLast(5).on('child_added', function(snapshot) {
+//     //     console.log(snapshot.key);
+//     // });
+//
+//     var title = req.params.title;
+//     var posts;
+//     var postList;
+//     var postsRef = db.ref('posts');
+//     postsRef.once('value', function(data) {
+//         posts = data.val();
+//         postList = Object.keys(posts).map(function(value) {
+//                                      return posts[value]});
+//
+//         if (title === undefined) {
+//             res.status(503);
+//             res.render('blog', {posts: postList});
+//         } else {
+//             var post = posts[title] || {};
+//             res.render('post', {post: post});
+//         }
+//     });
+// });
 
 // app.post('/contact', function(request, response) {
 //     var options, transporter;
@@ -76,6 +77,11 @@ app.get('/blog/:title?', function(req, res) {
 //         }
 //     });
 // });
+
+app.use(function(req, res) {
+    res.status(404);
+    res.render('404.pug', {title: '404: File Not Found'});
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
