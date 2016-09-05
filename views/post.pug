@@ -3,12 +3,11 @@ block content
     section.post
       .container
         .row
-          .col-lg-8.col-lg-offset-2.text-center
+          .col-lg-8.col-lg-offset-2
             h2.section-heading #{post.title}
 
             hr.light
 
-            p.text-faded
-              | #{post.description}
             .article
-              | #{post.description}
+                for p in post.description
+                    p #{p}

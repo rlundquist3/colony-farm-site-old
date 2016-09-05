@@ -11,8 +11,9 @@ block content
         section.post
           .container
             .row
-              .col-lg-8.col-lg-offset-2.text-center
-                h2.section-heading #{post.title}
+              .col-lg-8.col-lg-offset-2
+                h2.section-heading
+                    a(href='/blog/' + post.title) #{post.title}
                 hr.light
-                p.text-faded #{post.description}
-                a(href='/blog/' + post.title).btn.btn-default.btn-xl Read more...
+                p.text-faded #{post.description[0]}
+                a(href='/blog/' + post.title).btn.btn-default.btn-sm read more...

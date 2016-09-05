@@ -18,31 +18,36 @@ firebase.initializeApp({
 
 // The app only has access to public data as defined in the Security Rules
 var db = firebase.database();
-var ref = db.ref("/some_public_resource");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-});
 
 app.get('/', function(req, res) {
-  res.render('index');
+    var path = req.path;
+	res.locals.path = path;
+    res.render('index');
 });
 
 app.get('/blog/:title?', function(req, res) {
-    var postsRef = db.ref('posts');
+
     // postsRef.orderByChild('date').limitToLast(5).on('child_added', function(snapshot) {
     //     console.log(snapshot.key);
     // });
+
+    var title = req.params.title;
+    var posts;
+    var postList;
+    var postsRef = db.ref('posts');
     postsRef.once('value', function(data) {
-        var postList = Object.keys(data).map(function(value) {
-							         return data[value]})
+        posts = data.val();
+        postList = Object.keys(posts).map(function(value) {
+                                     return posts[value]});
+
+        if (title === undefined) {
+            res.status(503);
+            res.render('blog', {posts: postList});
+        } else {
+            var post = posts[title] || {};
+            res.render('post', {post: post});
+        }
     });
-    if (title === undefined) {
-		res.status(503);
-		res.render('blog', {posts: postList});
-	} else {
-		var post = posts[title] || {};
-		res.render('post', {post: post});
-	}
 });
 
 // app.post('/contact', function(request, response) {
